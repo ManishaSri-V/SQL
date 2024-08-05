@@ -1,0 +1,32 @@
+student token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjI1MDUzNzEsImV4cCI6MTcyMjc2NDU3MX0.lcfLpm1VPdzd50Qd_kAW2_rfnad7SGIOl0H6H5mOb8c"
+admin token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjI1ODUxNjEsImV4cCI6MTcyMjg0NDM2MX0.mNPZiXdRNIdh_vj0MSFsnQtVBIKakUPtiPaRwAq9oUM
+
+
+// Install Redis (I will share a video to install Redis on windows) //done
+
+
+1. Your company is building an e-commerce website with a high number of read operations for product details. Would Redis be a suitable solution for caching product details? Why or why not?
+Answer: Yes, Redis would be a suitable solution for caching product details in an e-commerce website with a high number of read operations.
+Why because, Redis is an in-memory data store, which means it can provide very fast read and write operations compared to traditional disk-based databases. This is particularly beneficial for an e-commerce site where product details are frequently accessed.
+Redis can handle a large number of operations per second, making it well-suited for high-traffic scenarios where many users are querying product details simultaneously.
+It allows setting expiration times on cached data. This means you can automatically expire and refresh cached product details after a certain period, ensuring that stale data is not served.
+It supports clustering, which allows you to distribute data across multiple nodes. This horizontal scaling capability ensures that your caching layer can handle growing traffic and larger datasets.
+
+
+2. You are designing a logging system for a large-scale application that requires storing and querying large amounts of log data over time. Would Redis be a good choice for this system? Explain your reasoning.
+Answer: Redis is generally not the ideal choice for a large-scale logging system that requires storing and querying large amounts of log data over time.
+It is an in-memory data store, where all data must fit into the available RAM. For large-scale logging systems, where logs can grow to terabytes over time, this can be a significant limitation. Storing massive amounts of log data in memory is not cost-effective and may exceed available memory resources.
+The cost of RAM is much higher compared to disk storage. Storing extensive log data in memory can become prohibitively expensive.
+Redis is optimized for speed rather than durability of large datasets. For critical logging where data integrity and durability are paramount, other solutions might be more appropriate.
+It provides basic querying capabilities and is optimized for specific use cases like caching, session management, and real-time analytics. However, it lacks advanced querying and indexing features that are typical in dedicated logging systems.
+
+
+3. A financial application requires strong consistency for transaction records. Would Redis be appropriate as the primary datastore? Why or why not?
+Answer: Redis may not be the most appropriate choice as the primary datastore for a financial application requiring strong consistency for transaction records.
+It  provides eventual consistency for its data replication and high availability features. In the context of financial transactions, strong consistency is crucial to ensure that all users see the same view of the data and that transactions are processed correctly and in the right order. Redis does not guarantee strong consistency across distributed setups; it primarily focuses on high performance and low latency.
+It  uses asynchronous replication, which means there can be a lag between the master and replica nodes. This lag can lead to inconsistencies, which are unacceptable in financial systems where data accuracy is critical.
+The durability provided by Redis may not meet the strict requirements for financial transactions, where you need guaranteed persistence of every transaction with minimal risk of data loss.
+If there’s a failure between the last sync and recovery, there’s a risk of losing recent transactions. This is not ideal for financial applications where each transaction must be reliably recorded.
+It supports transactions through the MULTI, EXEC, WATCH, and DISCARD commands. However, these transactions provide atomic operations on individual commands rather than a full ACID (Atomicity, Consistency, Isolation, Durability) transaction model. For financial applications requiring complex multi-step transactions with strong isolation and consistency, Redis's transaction support may fall short.
+
+
